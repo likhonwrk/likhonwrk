@@ -6,7 +6,7 @@
 
 </div>
 
-<img align="right" alt="Coding" width="300" src="https://raw.githubusercontent.com/devSouvik/devSouvik/master/gif3.gif">
+<img align="right" alt="Profile" width="300" src="https://i.ibb.co.com/XrGDXzj2/1-2.png">
 
 ### 🚀 About Me
 - 🌱 Building cool stuff with code
