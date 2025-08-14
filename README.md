@@ -6,9 +6,8 @@
 
 </div>
 
-<img align="right" alt="Profile" width="300" src="https://i.ibb.co.com/XrGDXzj2/1-2.png">
-
 ### 🚀 About Me
+<img align="right" alt="Profile" width="300" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(88, 166, 255, 0.3); border: 2px solid #58A6FF;" src="https://i.ibb.co.com/XrGDXzj2/1-2.png">
 - 🌱 Building cool stuff with code
 - 💡 Love solving problems creatively  
 - 🌍 Based in Jessore, Bangladesh
