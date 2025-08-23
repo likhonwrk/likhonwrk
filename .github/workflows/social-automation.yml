@@ -1,0 +1,58 @@
+# --- WARNING: USE WITH CAUTION ---
+# This workflow automates following a GitHub user.
+# Automating social interactions like following can be against GitHub's
+# Acceptable Use Policies and may lead to account restrictions.
+#
+# This workflow is DISABLED BY DEFAULT for your safety.
+#
+# To enable it, you must:
+# 1. Uncomment the 'schedule' section below.
+# 2. Create a repository secret named 'USERNAME' containing the
+#    GitHub username you want to automatically follow.
+#
+# By enabling this workflow, you acknowledge and accept the risks.
+
+name: Social Automation
+
+on:
+  # The schedule is disabled by default for safety.
+  # To enable, uncomment the following lines:
+  # schedule:
+  #   - cron: '0 * * * *' # Runs every hour
+  workflow_dispatch: # Allows manual triggering
+
+permissions:
+  contents: read
+
+jobs:
+  automate-follow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Follow a user
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USERNAME: ${{ secrets.USERNAME }} # IMPORTANT: Set this secret in your repository settings
+        run: |
+          # Validate inputs
+          if [ -z "$GITHUB_TOKEN" ] || [ -z "$USERNAME" ]; then
+            echo "Error: Missing required secrets (GITHUB_TOKEN, USERNAME)"
+            exit 1
+          fi
+
+          echo "Attempting to follow user: $USERNAME"
+
+          # Use GitHub API to follow the user
+          # The -s option makes curl silent; -o /dev/null discards the body.
+          # -w "%{http_code}" writes the HTTP status code to stdout.
+          response_code=$(curl -s -o /dev/null -w "%{http_code}" \
+            -X PUT \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/user/following/$USERNAME)
+
+          if [ "$response_code" -eq 204 ]; then
+            echo "Successfully followed $USERNAME (or already following)."
+          else
+            echo "Error: Failed to follow user. GitHub API responded with code: $response_code"
+            exit 1
+          fi
